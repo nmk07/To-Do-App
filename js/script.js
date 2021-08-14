@@ -5,7 +5,8 @@ $(function () {
     $addedTasksDiv = $('#added-tasks')
     $tasksDiv = $('#tasks')
 
-    $('#added-tasks').on('change', 'input:checkbox', toggleTaskCompleteStatus)
+    $addedTasksDiv.on('change', 'input.cb-task-complete:checkbox', toggleTaskCompleteStatus)
+    $addedTasksDiv.on('click', 'input.cb-task-important:checkbox', toggleTaskImportance)
 
     $addTaskButton.click(addTask)
     $addTaskText.keydown(function (e) {
@@ -20,10 +21,11 @@ $(function () {
 
         newTaskHTML = `
         <div class="task">
-        <input type="checkbox">
-        <span>${newTask}</span>
-        <hr>
+        <input type="checkbox" class="cb-task-complete">
+        <span class="task-title">${newTask}</span>
+        <label><input type="checkbox" class="cb-task-important">Mark as important</label>
         </div>
+        <hr>
         `
         $addTaskText.val(null)
         $addedTasksDiv.prepend(newTaskHTML)
@@ -40,5 +42,16 @@ $(function () {
             $(this).parent().removeClass('completed-task')
         }
         console.log('update task')
+    }
+
+    function toggleTaskImportance() {
+        isTaskImportant = $(this).parents('div.task').hasClass('important-task')
+        if(isTaskImportant) {
+            $(this).parents('div.task').removeClass('important-task')
+        }
+        else {
+            $(this).parents('div.task').addClass('important-task')
+        }
+        console.log('toggleTaskImportance')
     }
 })

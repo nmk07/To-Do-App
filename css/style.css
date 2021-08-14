@@ -1,4 +1,18 @@
-.completed-task {
+.completed-task > .task-title {
     text-decoration: line-through;
     color: grey;
+}
+
+.important-task > .task-title  {
+    color: red;
+    font-weight: bold;
+}
+
+.task {
+    display: flex;
+}
+
+.task > span{
+    flex: 1 1 0px;
+    padding: 0 10px;
 }
